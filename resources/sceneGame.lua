@@ -10,6 +10,7 @@ local touchedPoint
 local playerMoving
 local moveToX
 local moveToY
+local hammer1
 
 physics.debugDraw=true
 
@@ -55,6 +56,8 @@ local function screenTouched(event)
       end
       
     end
+  
+  
   
 end
 
@@ -107,7 +110,7 @@ end
 
 
 
---PAUSE
+--PLAYER TOUCHED
 function playerTouched(event)
   if (event.phase == "ended") then
       
@@ -116,6 +119,10 @@ function playerTouched(event)
       
       --PLAY THE ANIMATION
       i = gem2:play() 
+      
+      --ROTATE TOO
+      --wheel1.physics:setTransform(wheel1.x, wheel1.y, wheel1.rotation + 45)
+      
       
       
   end   
@@ -145,7 +152,17 @@ function scene:setUp(event)
                                     xAnchor = .5, yAnchor = .5, 
                                     source = theAnim, name = "PLAYER" } )   
     
+       
+    
+    
+    hammer1 = director:createSprite({ x = -160, y = 0, xAnchor = .5, yAnchor = .5, source = "textures/h1.png", xScale = 3, yScale = 3 } )
+    
+    gem2:addChild(hammer1)
+    
+    
+    
     physics:addNode(gem2, {radius = 40, density=0} )
+    physics:addNode(hammer1)
     playerMoving = false
     gem2:addEventListener("collision", collisionOccured)
     gem2:addEventListener("touch", playerTouched)
