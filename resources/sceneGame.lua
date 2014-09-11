@@ -11,6 +11,7 @@ local playerMoving
 local moveToX
 local moveToY
 local hammer1
+local hammerSwinging
 
 physics.debugDraw=true
 
@@ -66,6 +67,8 @@ end
 --UPDATE EVERYTHING
 function updateEverything()
   
+  
+    --SEE IF PLAYER IS MOVING ACROSS THE SCREEN
     if (playerMoving == true) then
                   
       --  DISTANCE FORMULA
@@ -91,8 +94,24 @@ function updateEverything()
       end                   
       
     end    
+    
+    
+    
+    --SEE IF THE HAMMER IS SWINGING
+    if (hammerSwinging == true) then
+      hammer1.physics:setTransform(hammer1.x + 16, hammer1.y, hammer1.rotation)
+    
+    
+    end
+    
+    
+    
   
 end
+
+
+
+
 
 
 
@@ -122,6 +141,9 @@ function playerTouched(event)
       
       --ROTATE TOO
       --wheel1.physics:setTransform(wheel1.x, wheel1.y, wheel1.rotation + 45)
+      
+      --SLAM HAMMER DOWN
+      hammerSwinging = true
       
       
       
@@ -164,6 +186,7 @@ function scene:setUp(event)
     physics:addNode(gem2, {radius = 40, density=0} )
     physics:addNode(hammer1)
     playerMoving = false
+    hammerSwinging = false
     gem2:addEventListener("collision", collisionOccured)
     gem2:addEventListener("touch", playerTouched)
     
