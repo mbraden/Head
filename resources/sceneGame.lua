@@ -15,6 +15,28 @@ local hammerSwinging
 
 physics.debugDraw=true
 
+------------------------------------------------------------------------------------------------
+--          CLASS PLAYER
+------------------------------------------------------------------------------------------------
+cPlayer = inheritsFrom(baseClass)
+
+function cPlayer:new()
+  local o = cPlayer:create()
+  
+  cPlayer:init(o)
+  return o
+  
+end
+
+function cPlayer:init(o)
+  --INITIALIZE EVERYTHING
+  o.x = 0
+  o.y = 0
+  o.name = ""
+
+end
+-------------------------------------------------------------------------------------------------
+
 --GO TO MAIN MENU
 function goMainMenu(event)
   if (event.phase == "ended") then
